@@ -338,7 +338,6 @@ internal class Scene
             Console.WriteLine("                  ");
             Console.SetCursorPosition(12, 13);
             Console.WriteLine("                  ");
-            Console.ForegroundColor= ConsoleColor.DarkGreen;
             if (monsterHand == 1)
             {
 
@@ -386,7 +385,6 @@ internal class Scene
                 Console.SetCursorPosition(12, 13);
                 Console.WriteLine("---.__________)");
             }
-            Console.ResetColor();
             if (Program.pick == monsterHand)
             {
                 Console.SetCursorPosition(3, 2);
