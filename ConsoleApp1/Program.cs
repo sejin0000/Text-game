@@ -17,11 +17,12 @@ class Program
         Console.SetWindowSize(42, 32);
         Console.Title = "Txet rpg";
 
+
         do
         {
-            scene.TitleScene();
-            scene.NameScene();
-            scene.BasicSettingScene();
+            //scene.TitleScene();
+            //scene.NameScene();
+            //scene.BasicSettingScene();
             scene.MainScene();
         } while (!over);
 

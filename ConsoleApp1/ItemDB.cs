@@ -16,6 +16,8 @@ class ItemDB
 
     public Item a005 = new Item("작은 체력 물약", "조금이나마 채력을 채워준다", 3, 2, 30);
     public Item a006 = new Item("체력 물약", "체력을 채워준다", 3, 4,50);
+
+
 }
 
  struct Item

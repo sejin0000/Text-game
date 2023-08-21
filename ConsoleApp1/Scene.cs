@@ -12,7 +12,7 @@ internal class Scene
     TextBot bot = new TextBot();    
     Item item = new Item();
 
-
+    
     public void MainPanel()
     {
         Console.SetCursorPosition(0, 1);
@@ -397,7 +397,7 @@ internal class Scene
                 Console.SetCursorPosition(3, 2);
                 Console.WriteLine("(  ‘Д’)");
 
-                monsterHP -= Player.ATK;
+                monsterHP -= Player.ATK + Player.STR;
                 bot.Output("살살 때려!!");
 
                 if (monsterHP < 0)
@@ -478,33 +478,35 @@ internal class Scene
         ShopItem();
 
         Console.SetCursorPosition(0,1);
-        Console.WriteLine(@" ┌─────────────────────────────────────┐ 
- │      _____  __ __  _____  _____     │ 
- │     /  ___>/  |  \/  _  \/  _  \    │ 
- │     |___  ||  _  ||  |  ||   __/    │ 
- │     <_____/\__|__/\_____/\__/       │ 
- │                                     │ 
- │ ─────────────────────────────────── │ 
- │                                     │ 
- │                                     │ 
- │                                     │ 
- │                                     │  
- │                                     │ 
- │                                     │ 
- │                                     │ 
- │                                     │ 
- │                                     │ 
- │                                     │ 
- │                                     │ 
- │                                     │ 
- └─────────────────────────────────────┘
- ┌─────────────────────────────────────┐
- │     [1]▼           [2]▲           │ 
- │     [3]자세히보기   [4]나가기       │
- └─────────────────────────────────────┘
- ┌─────────────────────────────────────┐
- │                                     │
- └─────────────────────────────────────┘");
+        Console.SetCursorPosition(0, 1);
+        Console.WriteLine(" ┌─────────────────────────────────────┐ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │ ─────────────────────────────────── │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" └─────────────────────────────────────┘ ");
+        Console.WriteLine(" ┌─────────────────────────────────────┐ ");
+        Console.WriteLine(" │     [1]▼           [2]▲           │ ");
+        Console.WriteLine(" │     [3]자세히보기   [4]나가기       │ ");
+        Console.WriteLine(" └─────────────────────────────────────┘ ");
+        Console.WriteLine(" ┌─────────────────────────────────────┐ ");
+        Console.WriteLine(" │                                     │ ");
+        Console.WriteLine(" └─────────────────────────────────────┘ ");
+        Console.WriteLine("                                           "); ;
 
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         Console.SetCursorPosition(7, 2);
@@ -655,7 +657,7 @@ internal class Scene
             }
         } while (!isOut);
 
-    }//인벤토리 씬
+    }//인벤토리 씬 
     public void MyInfo()
     {
         Console.SetCursorPosition(0, 1);
