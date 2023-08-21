@@ -118,7 +118,7 @@ internal class Scene
         {
             Environment.Exit(0);
         }
-    }//타이틀 씬
+    }//타이틀 씬2
     public void NameScene()
     {
         MainPanel();
@@ -278,6 +278,16 @@ internal class Scene
     public void Battle()
     {
         MainPanel();
+        Console.SetCursorPosition(3, 18);
+        Console.Write("몬스터");
+        Console.SetCursorPosition(3, 19);
+        Console.Write("[ HP ]");
+
+
+        Console.SetCursorPosition(0, 22);
+        Console.WriteLine(" │     [1]가위         [2]바위         │ ");
+        Console.WriteLine(" │     [3]보                           │ ");
+
         int monsterLevel = new Random().Next(1, 6);
         if (monsterLevel < 5)
         {
@@ -293,17 +303,7 @@ internal class Scene
             monsterHP = 15;
         }
 
-        Console.SetCursorPosition(3, 18);
-        Console.Write("몬스터");
-        Console.SetCursorPosition(3, 19);
-        Console.Write("[ HP ]");
-
-
-        Console.SetCursorPosition(0, 22);
-        Console.WriteLine(" │     [1]가위         [2]바위         │ ");
-        Console.WriteLine(" │     [3]보                           │ ");
-
-        while (monsterHP != 0 || Player.HP != 0)
+        while (monsterHP > 0 && Player.HP > 0)
         {
             int monsterHand = new Random().Next(1, 4);// 1.가위 2.바위 3.보
             Console.SetCursorPosition(9, 19);
@@ -314,11 +314,14 @@ internal class Scene
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("♥");
                 Console.ResetColor();
-            }
+
+            } 
             bot.Option(3);
             if (Program.pick == monsterHand)
             {
                 bot.Output("무승부");
+                Thread.Sleep(500);
+
             }
             else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 ||Program.pick == 3 && monsterHand == 2)
             {
@@ -333,18 +336,20 @@ internal class Scene
                 HP_Outut();
             }
         }
-
-        bot.Option(2);
-        Console.SetCursorPosition(0, 22);
-        Console.WriteLine(" │     [1]계속하기      [2]돌아가기    │ ");
-        Console.WriteLine(" │                                     │ ");
-        if (Program.pick == 2)
+        if (Player.HP > 0)
         {
-            MainScene();
+            Console.SetCursorPosition(0, 22);
+            Console.WriteLine(" │     [1]계속하기      [2]돌아가기    │ ");
+            Console.WriteLine(" │                                     │ ");
+            bot.Option(2);
         }
-        else
+        if (Program.pick == 1 && Player.HP > 0)
         {
             Battle();
+        }
+        if (Program.pick == 2 && Player.HP > 0)
+        {
+            MainScene();
         }
     }//전투 씬
     public void Shop()
