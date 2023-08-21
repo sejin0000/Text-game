@@ -85,6 +85,30 @@ internal class Scene
  └─────────────────────────────────────┘
 ");
         Console.SetCursorPosition(3, 26);
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.SetCursorPosition(7, 3);
+        Console.Write(" ____  _____  __  __  ____");
+        Console.SetCursorPosition(7, 4);
+        Console.Write("/    \\/   __\\/  \\/  \\/    \\");
+        Console.SetCursorPosition(7, 5);
+        Console.Write("\\-  -/|   __|>-    -<\\-  -/");
+        Console.SetCursorPosition(7, 6);
+        Console.Write(" |__| \\_____/\\__/\\__/ |__|");
+
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.SetCursorPosition(7, 8);
+        Console.Write("    _____  _____  _____");
+        Console.SetCursorPosition(7, 9);
+        Console.Write("   /  _  \\/  _  \\/   __\\");
+        Console.SetCursorPosition(7, 10);
+        Console.Write("   |  _  <|   __/|  |_ |");
+        Console.SetCursorPosition(7, 11);
+        Console.Write("   \\__|\\_/\\__/   \\_____/");
+        Console.ResetColor();
+
+
+
         bot.Option(2);
         if (Program.pick == 1)
         {
@@ -97,20 +121,28 @@ internal class Scene
     }//타이틀 씬
     public void NameScene()
     {
+        MainPanel();
+        bot.Output("용사님! 이름을 알려주세요!");
         do
         {
-            MainPanel();
-            bot.Output("용사님! 이름을 알려주세요!");
+            Console.SetCursorPosition(3, 26);
             Player.name = Console.ReadLine();
-            Console.SetCursorPosition(3, 25);
-            MainPanel();
-            bot.Output("{0}님이 확실한가요?", Player.name);
+            if (Player.name.Length < 10)
+            {
+                MainPanel();
+                bot.Output("{0}님이 확실한가요?", Player.name);
 
-            Console.SetCursorPosition(0, 22);
-            Console.WriteLine(" │     [1]맞습니다     [2]아닙니다     │");
+                Console.SetCursorPosition(0, 22);
+                Console.WriteLine(" │     [1]맞습니다     [2]아닙니다     │");
 
-            bot.Option(2);
-
+                bot.Option(2);
+            }
+            else
+            {
+                Console.SetCursorPosition(3, 28);
+                Console.WriteLine("최대 9글자까지 가능합니다");
+                Program.pick = 2;
+            }
         } while (Program.pick != 1);
 
 
@@ -205,8 +237,26 @@ internal class Scene
             HP_Outut();
             SortItems();
             MainPanel();
-            Console.SetCursorPosition(0, 22);
-            Console.WriteLine(" │     [1]전투시작     [2]상점열기     │\n │     [3]인벤토리     [4]상태보기     │");
+
+            Console.SetCursorPosition(7, 22);
+            Console.Write("[1]");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("전투시작");
+            Console.ResetColor();
+
+            Console.SetCursorPosition(23, 22);
+            Console.Write("[2]");
+            Console.Write("상점보기");
+
+            Console.SetCursorPosition(7, 23);
+            Console.Write("[3]");
+            Console.Write("인벤토리");
+
+            Console.SetCursorPosition(23, 23);
+            Console.Write("[4]");
+            Console.Write("나의정보");
+
+
             bot.Option(4);
             switch (Program.pick)
             {
@@ -266,13 +316,28 @@ internal class Scene
  │                                     │
  └─────────────────────────────────────┘");
 
-        Console.SetCursorPosition(10, 8);
-        Console.WriteLine("보유중인 골드 : {0}G",Player.Gold);
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+        Console.SetCursorPosition(7, 2);
+        Console.Write(" _____  __ __  _____  _____");
+        Console.SetCursorPosition(7, 3);
+        Console.Write("/  ___>/  |  \\/  _  \\/  _  \\");
+        Console.SetCursorPosition(7, 4);
+        Console.Write("|___  ||  _  ||  |  ||   __/");
+        Console.SetCursorPosition(7, 5);
+        Console.Write("<_____/\\__|__/\\_____/\\__/");
+        Console.ResetColor();
 
         Console.SetCursorPosition(10, 10);
         Console.WriteLine("가격");
 
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.SetCursorPosition(10, 8);
+
+        Console.Write("보유중인 골드 : ");
+
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+        Console.WriteLine("{0}G", Player.Gold);
+
         Console.SetCursorPosition(10, 12);
         Console.WriteLine("90G");
 
@@ -336,14 +401,19 @@ internal class Scene
         SortItems();
         MainPanel();
         Console.SetCursorPosition(3, 3);
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("             Inventory");
+        Console.ResetColor();
         Console.SetCursorPosition(3, 5);
         Console.WriteLine("───────────────────────────────────");
         int cursor = 0;
         int count = 0;
         bool isOut = false;
         Console.SetCursorPosition(6, 6);
-        Console.WriteLine("보유중인 골드 : {0}G",Player.Gold);
+        Console.Write("보유중인 골드 : ");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine("{0}G", Player.Gold);
+        Console.ResetColor();
 
         for (int i = 0; i < Player.inventory.Length; i++)
         {
@@ -429,6 +499,18 @@ internal class Scene
  │                                     │
  └─────────────────────────────────────┘");
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.SetCursorPosition(8, 3);
+        Console.WriteLine(" ___  _____  _____  _____");
+        Console.SetCursorPosition(8, 4);
+        Console.WriteLine("/   \\/  _  \\/   __\\/  _  \\");
+        Console.SetCursorPosition(8, 5);
+        Console.WriteLine("|   ||  |  ||   __||  |  |");
+        Console.SetCursorPosition(8, 6);
+        Console.WriteLine("\\___/\\__|__/\\__/   \\_____/");
+        Console.ResetColor();
+
+
         Console.SetCursorPosition(12, 9);
         Console.WriteLine(" 이름  : {0}", Player.name);
 
@@ -436,7 +518,11 @@ internal class Scene
         Console.WriteLine(" 레벨  : LV.{0}", Player.Level);
 
         Console.SetCursorPosition(12, 11);
-        Console.WriteLine(" 골드  : {0}G", Player.Gold);
+        Console.Write(" 골드  : ");
+        Console.SetCursorPosition(19, 11);
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine("{0}G", Player.Gold);
+        Console.ResetColor();
 
         Console.SetCursorPosition(12, 12);
         Console.WriteLine(" 체력  : {0}", Player.CON);
@@ -452,23 +538,23 @@ internal class Scene
 
         if (Player.Use[0].name != null)
         {
-            Console.SetCursorPosition(12, 16);
+            Console.SetCursorPosition(12, 17);
             Console.WriteLine(" 무기  : {0}", Player.Use[0].name);
         }
         else
         {
-            Console.SetCursorPosition(12, 16);
+            Console.SetCursorPosition(12, 17);
             Console.WriteLine(" 무기  : 없음");
         }
 
         if (Player.Use[1].name != null)
         {
-            Console.SetCursorPosition(12, 17);
+            Console.SetCursorPosition(12, 18);
             Console.WriteLine(" 갑옷  : {0}", Player.Use[1].name);
         }
         else
         {
-            Console.SetCursorPosition(12, 17);
+            Console.SetCursorPosition(12, 18);
             Console.WriteLine(" 갑옷  : 없음");
         }
 
@@ -725,6 +811,18 @@ internal class Scene
  ┌─────────────────────────────────────┐
  │                                     │
  └─────────────────────────────────────┘");
+
+        Console.ForegroundColor= ConsoleColor.DarkRed;
+        Console.SetCursorPosition(7, 3);
+        Console.Write(" _____  __ __  _____  _____ ");
+        Console.SetCursorPosition(7, 4);
+        Console.Write("/  _  \\/  |  \\/   __\\/  _  \\");
+        Console.SetCursorPosition(7, 5);
+        Console.Write("|  |  |\\  |  /|   __||  _  <");
+        Console.SetCursorPosition(7, 6);
+        Console.Write("\\_____/ \\___/ \\_____/\\__|\\_/");
+        Console.ResetColor();
+
         bot.Option(2);
         if(Program.pick == 1)
         {

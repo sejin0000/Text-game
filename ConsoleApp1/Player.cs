@@ -10,7 +10,7 @@ static class Player
 
     // 기본 스탯
     public static int Level = 1;
-    public static int HP;// 현재 채력
+    public static int HP = 1;// 현재 채력
     public static int CON;// 최대 체력
     public static int STR;// 근력
     public static int LUK;// 행운
