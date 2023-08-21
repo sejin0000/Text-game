@@ -278,6 +278,11 @@ internal class Scene
     public void Battle()
     {
         MainPanel();
+
+        Console.SetCursorPosition(3, 2);
+        Console.WriteLine("(  ㅋДㅋ)");
+
+        bot.Output("덤벼 보시지 ㅋ");
         Console.SetCursorPosition(3, 18);
         Console.Write("몬스터");
         Console.SetCursorPosition(3, 19);
@@ -314,24 +319,97 @@ internal class Scene
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write("♥");
                 Console.ResetColor();
-
-            } 
+            }
             bot.Option(3);
+            Console.SetCursorPosition(3, 2);
+            Console.WriteLine("                        ");
+            Console.SetCursorPosition(3, 3);
+            Console.WriteLine("                        ");
+
+            Console.SetCursorPosition(12, 8);
+            Console.WriteLine("                  ");
+            Console.SetCursorPosition(12, 9);
+            Console.WriteLine("                  ");
+            Console.SetCursorPosition(12, 10);
+            Console.WriteLine("                  ");
+            Console.SetCursorPosition(12, 11);
+            Console.WriteLine("                  ");
+            Console.SetCursorPosition(12, 12);
+            Console.WriteLine("                  ");
+            Console.SetCursorPosition(12, 13);
+            Console.WriteLine("                  ");
+            Console.ForegroundColor= ConsoleColor.DarkGreen;
+            if (monsterHand == 1)
+            {
+
+                Console.SetCursorPosition(12, 8);
+                Console.WriteLine("    _____");
+                Console.SetCursorPosition(12, 9);
+                Console.WriteLine("___/   __)_______");
+                Console.SetCursorPosition(12, 10);
+                Console.WriteLine("         ________)");
+                Console.SetCursorPosition(12, 11);
+                Console.WriteLine("       __________)");
+                Console.SetCursorPosition(12, 12);
+                Console.WriteLine("      (____)");
+                Console.SetCursorPosition(12, 13);
+                Console.WriteLine("---.__(___)");
+
+            }
+            if (monsterHand == 2)
+            {
+                Console.SetCursorPosition(12, 8);
+                Console.WriteLine("    _____");
+                Console.SetCursorPosition(12, 9);
+                Console.WriteLine("___/   __)__");
+                Console.SetCursorPosition(12, 10);
+                Console.WriteLine("      (_____)");
+                Console.SetCursorPosition(12, 11);
+                Console.WriteLine("      (_____)");
+                Console.SetCursorPosition(12, 12);
+                Console.WriteLine("      (____)");
+                Console.SetCursorPosition(12, 13);
+                Console.WriteLine("---.__(___)");
+            }
+            if (monsterHand == 3)
+            {
+                Console.SetCursorPosition(12, 8);
+                Console.WriteLine("    ________");
+                Console.SetCursorPosition(12, 9);
+                Console.WriteLine("___/    ____)____");
+                Console.SetCursorPosition(12, 10);
+                Console.WriteLine("           ______)");
+                Console.SetCursorPosition(12, 11);
+                Console.WriteLine("          _______)");
+                Console.SetCursorPosition(12, 12);
+                Console.WriteLine("         _______)");
+                Console.SetCursorPosition(12, 13);
+                Console.WriteLine("---.__________)");
+            }
+            Console.ResetColor();
             if (Program.pick == monsterHand)
             {
-                bot.Output("무승부");
-                Thread.Sleep(500);
+                Console.SetCursorPosition(3, 2);
+                Console.WriteLine("(   -Д- )");
 
+                bot.Output("크윽 아쉽군..");
             }
             else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 ||Program.pick == 3 && monsterHand == 2)
             {
+                Console.SetCursorPosition(3, 2);
+                Console.WriteLine("(  ‘Д’)");
+
                 monsterHP -= Player.ATK;
-                bot.Output("승리");
-                
+                bot.Output("살살 때려!!");
+
             }
             else
             {
-                bot.Output("패배");
+                Console.SetCursorPosition(3, 2);
+                Console.WriteLine("(  ㅋДㅋ)");
+
+                bot.Output("잘 좀 해보라고 형씨 ㅋㅋ");
+                Thread.Sleep(500);
                 Player.HP -= monsterLevel;
                 HP_Outut();
             }

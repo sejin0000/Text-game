@@ -16,13 +16,41 @@ class Program
         Console.SetWindowSize(42, 32);
         Console.Title = "Txet rpg";
 
+
+        Console.WriteLine(@"
+
+    _____
+___/   __)__
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+
+    ________
+___/    ____)____
+           ______)
+          _______)
+         _______)
+---.__________)
+
+    _____
+___/   __)_______
+         ________)
+       __________)
+      (____)
+---.__(___)
+
+
+");
+
         do
         {
-            scene.TitleScene();
-            scene.NameScene();
-            scene.BasicSettingScene();
-            scene.BasicItem();
+            //scene.TitleScene();
+            //scene.NameScene();
+            //scene.BasicSettingScene();
+            //scene.BasicItem();
             scene.MainScene();
+            
         } while (!over);
 
     }
