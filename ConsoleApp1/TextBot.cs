@@ -89,7 +89,7 @@ class TextBot
         {
             Console.SetCursorPosition(3, 26);
             string input = Console.ReadLine();
-            if(int.TryParse(input,out num))
+            if(int.TryParse(input,out num) && num >= 0)
             {
                 isNum = true;
             }
