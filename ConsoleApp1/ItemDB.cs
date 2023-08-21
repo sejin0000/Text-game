@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 class ItemDB
 {
     // \n │ 글씨
+    int a;
+
     public Item a000;
     public Item a001 = new Item("초심자의 검", "모두에게 기본으로 지급되는 검이다", 1, 5);
     public Item a002 = new Item("초심자의 갑옷", "모두에게 기본으로 지급되는 갑옷이다", 2, 5);
