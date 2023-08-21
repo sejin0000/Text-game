@@ -13,14 +13,14 @@ class Program
     {
         Scene scene = new Scene();  
         TextBot text = new TextBot();
-        Console.SetWindowSize(42, 31);
+        Console.SetWindowSize(42, 32);
         Console.Title = "Txet rpg";
 
         do
         {
-            scene.TitleScene();
-            scene.NameScene();
-            scene.BasicSettingScene();
+            //scene.TitleScene();
+            //scene.NameScene();
+            //scene.BasicSettingScene();
             scene.BasicItem();
             scene.MainScene();
         } while (!over);

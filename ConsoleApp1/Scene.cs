@@ -277,8 +277,75 @@ internal class Scene
     }//메인 씬
     public void Battle()
     {
-        Player.HP -= 1;
-        MainScene();
+        MainPanel();
+        int monsterLevel = new Random().Next(1, 6);
+        if (monsterLevel < 5)
+        {
+            monsterLevel = Player.Level;
+        }
+        else
+        {
+            monsterLevel = Player.Level + 1;
+        }
+        int monsterHP = monsterLevel * 5;
+        if (monsterHP > 15)
+        {
+            monsterHP = 15;
+        }
+
+        Console.SetCursorPosition(3, 18);
+        Console.Write("몬스터");
+        Console.SetCursorPosition(3, 19);
+        Console.Write("[ HP ]");
+
+
+        Console.SetCursorPosition(0, 22);
+        Console.WriteLine(" │     [1]가위         [2]바위         │ ");
+        Console.WriteLine(" │     [3]보                           │ ");
+
+        while (monsterHP != 0 || Player.HP != 0)
+        {
+            int monsterHand = new Random().Next(1, 4);// 1.가위 2.바위 3.보
+            Console.SetCursorPosition(9, 19);
+            Console.Write("                              ");
+            Console.SetCursorPosition(9, 19);
+            for (int i = 1; i <= monsterHP; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("♥");
+                Console.ResetColor();
+            }
+            bot.Option(3);
+            if (Program.pick == monsterHand)
+            {
+                bot.Output("무승부");
+            }
+            else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 ||Program.pick == 3 && monsterHand == 2)
+            {
+                monsterHP -= Player.ATK;
+                bot.Output("승리");
+                
+            }
+            else
+            {
+                bot.Output("패배");
+                Player.HP -= monsterLevel;
+                HP_Outut();
+            }
+        }
+
+        bot.Option(2);
+        Console.SetCursorPosition(0, 22);
+        Console.WriteLine(" │     [1]계속하기      [2]돌아가기    │ ");
+        Console.WriteLine(" │                                     │ ");
+        if (Program.pick == 2)
+        {
+            MainScene();
+        }
+        else
+        {
+            Battle();
+        }
     }//전투 씬
     public void Shop()
     {
@@ -615,12 +682,12 @@ internal class Scene
             else if(Player.inventory[num].type == 2)
             {
                 Player.Use[1] = Player.inventory[num];
-                Player.DEF = Player.inventory[num].function;
+                Player.DEF = Player.Use[1].function;
             }
             else
             {
                 Player.Use[0] = Player.inventory[num];
-                Player.ATK = Player.inventory[num].function;
+                Player.ATK = Player.Use[0].function;
             }
         }
         if (Program.pick == 2)
@@ -725,7 +792,7 @@ internal class Scene
     {
         Player.inventory[8] = itemDB.a001;
         Player.inventory[9] = itemDB.a002;
-    }//아이템 테스트
+    }//아이템 기본 지급
     public void SortItems()
     {
         for (int i = 0 ;i < 9 ; i++)

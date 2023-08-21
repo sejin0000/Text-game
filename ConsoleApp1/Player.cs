@@ -10,15 +10,14 @@ static class Player
 
     // 기본 스탯
     public static int Level = 1;
-    public static int HP = 1;// 현재 채력
-    public static int CON;// 최대 체력
+    public static int HP = 3;// 현재 채력
+    public static int CON = 3;// 최대 체력
     public static int STR;// 근력
     public static int LUK;// 행운
     public static int Gold = 100;
 
     public static int ATK;//공격력
     public static int DEF;//방어력
-
 
     public static Item[] Use = new Item[2];//창착중인 아이템 0 무기 1갑옷
      
