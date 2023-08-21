@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Xml.Linq;
@@ -16,41 +17,12 @@ class Program
         Console.SetWindowSize(42, 32);
         Console.Title = "Txet rpg";
 
-
-        Console.WriteLine(@"
-
-    _____
-___/   __)__
-      (_____)
-      (_____)
-      (____)
----.__(___)
-
-    ________
-___/    ____)____
-           ______)
-          _______)
-         _______)
----.__________)
-
-    _____
-___/   __)_______
-         ________)
-       __________)
-      (____)
----.__(___)
-
-
-");
-
         do
         {
-            //scene.TitleScene();
-            //scene.NameScene();
-            //scene.BasicSettingScene();
-            //scene.BasicItem();
+            scene.TitleScene();
+            scene.NameScene();
+            scene.BasicSettingScene();
             scene.MainScene();
-            
         } while (!over);
 
     }

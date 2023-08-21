@@ -225,6 +225,7 @@ internal class Scene
         HP_Outut();
         MainPanel();
         bot.Output("좋습니다 용사님 함께 여정을 떠나시죠");
+        BasicItem();
     }//스탯 설정 씬
     public void MainScene()
     {
@@ -279,16 +280,6 @@ internal class Scene
     {
         MainPanel();
 
-        Console.SetCursorPosition(3, 2);
-        Console.WriteLine("(  ㅋДㅋ)");
-
-        bot.Output("덤벼 보시지 ㅋ");
-        Console.SetCursorPosition(3, 18);
-        Console.Write("몬스터");
-        Console.SetCursorPosition(3, 19);
-        Console.Write("[ HP ]");
-
-
         Console.SetCursorPosition(0, 22);
         Console.WriteLine(" │     [1]가위         [2]바위         │ ");
         Console.WriteLine(" │     [3]보                           │ ");
@@ -307,6 +298,15 @@ internal class Scene
         {
             monsterHP = 15;
         }
+
+        Console.SetCursorPosition(3, 2);
+        Console.WriteLine("(  ㅋДㅋ)");
+
+        bot.Output("덤벼 보시지 ㅋ");
+        Console.SetCursorPosition(3, 18);
+        Console.Write("[LV{0}] 몬스터", monsterLevel);
+        Console.SetCursorPosition(3, 19);
+        Console.Write("[ HP ]");
 
         while (monsterHP > 0 && Player.HP > 0)
         {
@@ -392,7 +392,7 @@ internal class Scene
 
                 bot.Output("크윽 아쉽군..");
             }
-            else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 ||Program.pick == 3 && monsterHand == 2)
+            else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 || Program.pick == 3 && monsterHand == 2)
             {
                 Console.SetCursorPosition(3, 2);
                 Console.WriteLine("(  ‘Д’)");
@@ -400,6 +400,23 @@ internal class Scene
                 monsterHP -= Player.ATK;
                 bot.Output("살살 때려!!");
 
+                if (monsterHP < 0)
+                {
+                    Console.SetCursorPosition(3, 2);
+                    Console.WriteLine("(   - _- )");
+
+                    bot.Output("크윽.. 좋은 싸움이였다...");
+                    Player.Kill += 1;
+                    Console.SetCursorPosition(9, 19);
+                    Console.Write("                              ");
+
+                    Player.Gold += 50;
+                    if (Player.Kill == 5)
+                    {
+                        Player.Kill = 0;
+                        LevelUP();
+                    }
+                }
             }
             else
             {
@@ -408,8 +425,33 @@ internal class Scene
 
                 bot.Output("잘 좀 해보라고 형씨 ㅋㅋ");
                 Thread.Sleep(500);
-                Player.HP -= monsterLevel;
-                HP_Outut();
+                if (Player.Use[1].function > 0)
+                {
+                    Player.Use[1].function -= monsterLevel;
+                    Player.DEF -= monsterLevel;
+                    if (Player.DEF < 0)
+                    {
+                        Player.DEF = 0;
+                    }
+                    if (Player.Use[1].function <= 0)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            if (Player.inventory[i].name == Player.Use[1].name)
+                            {
+                                Player.DEF = 0;
+                                Player.Use[1] = itemDB.a000;
+                                Player.inventory[i] = itemDB.a000;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Player.HP -= monsterLevel;
+                    HP_Outut();
+                }
             }
         }
         if (Player.HP > 0)
@@ -487,16 +529,16 @@ internal class Scene
         Console.WriteLine("{0}G", Player.Gold);
 
         Console.SetCursorPosition(10, 12);
-        Console.WriteLine("90G");
+        Console.WriteLine("{0}G",Player.shop[0].price);
 
         Console.SetCursorPosition(10, 14);
-        Console.WriteLine("90G");
-
+        Console.WriteLine("{0}G",Player.shop[1].price);
+        
         Console.SetCursorPosition(10, 16);
-        Console.WriteLine("30G");
+        Console.WriteLine("{0}G",Player.shop[2].price);
 
         Console.SetCursorPosition(10, 18);
-        Console.WriteLine("50G");
+        Console.WriteLine("{0}G",Player.shop[3].price);
         Console.ResetColor();
 
         Console.SetCursorPosition(20, 10);
@@ -540,9 +582,8 @@ internal class Scene
                     isOut = true;
                     break;
             }
+
         } while (!isOut);
-
-
     }//상점 씬
     public void Inventory()
     {
@@ -613,7 +654,6 @@ internal class Scene
                     break;
             }
         } while (!isOut);
-
 
     }//인벤토리 씬
     public void MyInfo()
@@ -737,17 +777,19 @@ internal class Scene
             Console.SetCursorPosition(3, 6);
             Console.Write("치유력 : ");
         }
-        Console.WriteLine("{0}", Player.inventory[num].function);
         Console.SetCursorPosition(3, 8);
+        Console.Write("팬매 가격 : {0}G",Player.inventory[num].price / 2 );
+
+        Console.SetCursorPosition(3, 10);
         Console.WriteLine("설명 :");
-        Console.SetCursorPosition(3, 9);
+        Console.SetCursorPosition(3, 11);
         Console.WriteLine("{0}", Player.inventory[num].explanation);
 
         Console.SetCursorPosition(0, 22);
         Console.WriteLine(" │     [1]사용         [2]버리기       │");
         Console.SetCursorPosition(0, 23);
-        Console.WriteLine(" │     [3]나가기                       │");
-        bot.Option(3);
+        Console.WriteLine(" │     [3]판매하기     [4]나가기       │");
+        bot.Option(4);
         if (Program.pick == 1)
         {
             if (Player.inventory[num].type == 3)
@@ -777,30 +819,17 @@ internal class Scene
         }
         if (Program.pick == 3)
         {
-            Inventory();
+            Player.Gold += Player.inventory[num].price / 2;
+            Player.inventory[num] = itemDB.a000;
+        }
+        if (Program.pick == 4)
+        {
+
         }
         Inventory();
     }//아이템 정보
     public void ShopItemInfo(int num)
     {
-        int price = 0;//가격
-        if (num == 0)
-        {
-            price = 90;
-        }
-        if (num == 1)
-        {
-            price = 90;
-        }
-        if (num == 2)
-        {
-            price = 30;
-        }
-        if (num == 3)
-        {
-            price = 50;
-        }
-
         MainPanel();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("이름 : {0}", Player.shop[num].name);
@@ -837,12 +866,12 @@ internal class Scene
             bot.Option(2);
             if (Program.pick == 1)
             {
-                if (price <= Player.Gold)
+                if (Player.shop[num].price <= Player.Gold)
                 {
 
                     if (Player.inventory[9].name == null)
                     {
-                        Player.Gold -= price;
+                        Player.Gold -= Player.shop[num].price;
                         bot.ClearChat();
                         Console.SetCursorPosition(3, 28);
                         Console.WriteLine("구매가 완료 되었습니다");
@@ -1000,4 +1029,62 @@ internal class Scene
             Environment.Exit(0);
         }
     }//Over
+    public void LevelUP()
+    {
+        MainPanel();
+
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.SetCursorPosition(4, 2);
+        Console.Write(" ____   _____  __ __  _____  ____  ");
+        Console.SetCursorPosition(4, 3);
+        Console.Write("/  _/  /   __\\/  |  \\/   __\\/  _/ ");
+        Console.SetCursorPosition(4, 4);
+        Console.Write("|  |---|   __|\\  |  /|   __||  |---");
+        Console.SetCursorPosition(4, 5);
+        Console.Write("\\_____/\\_____/ \\___/ \\_____/\\_____/");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.SetCursorPosition(14, 6);
+        Console.Write(" __ __  _____ ");
+        Console.SetCursorPosition(14, 7);
+        Console.Write("/  |  \\/  _  \\ ");
+        Console.SetCursorPosition(14, 8);
+        Console.Write("|  |  ||   __/");
+        Console.SetCursorPosition(14, 9);
+        Console.Write("\\_____/\\__/  ");
+        Console.ResetColor();
+
+        Console.SetCursorPosition(17, 14);
+        Console.Write("[1]체력");
+
+        Console.SetCursorPosition(17, 16);
+        Console.Write("[2]근력");
+
+        Console.SetCursorPosition(17, 18);
+        Console.Write("[3]행운");
+
+        Console.SetCursorPosition(5, 12);
+        Console.Write("스탯 포인트를 하나 획득 했습니다");
+
+        Console.SetCursorPosition(0, 22);
+        Console.WriteLine(" │     [1]체력         [2]근력         │");
+        Console.WriteLine(" │     [3]행운                         │");
+        bot.Option(3);
+        if(Program.pick == 1)
+        {
+            Player.CON += 1;
+            Player.HP += 1;
+        }
+        if (Program.pick == 2)
+        {
+            Player.STR += 1;
+        }
+        if (Program.pick == 3)
+        {
+            Player.LUK += 1;
+        }
+        Player.Level += 1;
+        HP_Outut();
+    }//레벨업
 }
