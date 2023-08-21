@@ -17,8 +17,6 @@ class ItemDB
     public Item a005 = new Item("작은 체력 물약", "조금이나마 채력을 채워준다", 3, 2);
     public Item a006 = new Item("체력 물약", "체력을 채워준다", 3, 4);
 
-
-
     public Item a007 = new Item("중급자 갑옷", "아무래도 초급자 갑옷보다는\n │ 강해보인다", 1, 10);
     public Item a008 = new Item("중급자 갑옷", "아무래도 초급자 갑옷보다는\n │ 강해보인다", 1, 10);
     public Item a009 = new Item("중급자 갑옷", "아무래도 초급자 갑옷보다는\n │ 강해보인다", 1, 10);
