@@ -20,9 +20,9 @@ class Program
 
         do
         {
-            //scene.TitleScene();
-            //scene.NameScene();
-            //scene.BasicSettingScene();
+            scene.TitleScene();
+            scene.NameScene();
+            scene.BasicSettingScene();
             scene.MainScene();
         } while (!over);
 
