@@ -16,8 +16,6 @@ class Program
         TextBot text = new TextBot();
         Console.SetWindowSize(42, 32);
         Console.Title = "TXET.rpg";
-
-
         do
         {
             scene.TitleScene();

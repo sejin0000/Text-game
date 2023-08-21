@@ -86,7 +86,7 @@ internal class Scene
 ");
         Console.SetCursorPosition(3, 26);
 
-        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.SetCursorPosition(7, 3);
         Console.Write(" ____  _____  __  __  ____");
         Console.SetCursorPosition(7, 4);
@@ -96,7 +96,7 @@ internal class Scene
         Console.SetCursorPosition(7, 6);
         Console.Write(" |__| \\_____/\\__/\\__/ |__|");
 
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.SetCursorPosition(7, 8);
         Console.Write("    _____  _____  _____");
         Console.SetCursorPosition(7, 9);
@@ -121,10 +121,10 @@ internal class Scene
     }//타이틀 씬2
     public void NameScene()
     {
-        MainPanel();
-        bot.Output("용사님! 이름을 알려주세요!");
         do
         {
+            MainPanel();
+            bot.Output("용사님! 이름을 알려주세요!");
             Console.SetCursorPosition(3, 26);
             Player.name = Console.ReadLine();
             if (Player.name.Length < 10)
@@ -225,6 +225,7 @@ internal class Scene
         HP_Outut();
         MainPanel();
         bot.Output("좋습니다 용사님 함께 여정을 떠나시죠");
+        Thread.Sleep(500);
         BasicItem();
     }//스탯 설정 씬
     public void MainScene()
@@ -237,7 +238,111 @@ internal class Scene
         {
             HP_Outut();
             SortItems();
-            MainPanel();
+            Console.SetCursorPosition(0, 1);
+            Console.WriteLine(" ┌─────────────────────────────────────┐ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" └─────────────────────────────────────┘ ");
+            Console.WriteLine(" ┌─────────────────────────────────────┐ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" └─────────────────────────────────────┘ ");
+            Console.WriteLine(" ┌─────────────────────────────────────┐ ");
+            Console.WriteLine(" │                                     │ ");
+            Console.WriteLine(" └─────────────────────────────────────┘ ");
+            Console.WriteLine("                                           ");
+            Console.SetCursorPosition(0, 0);
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
+            Console.SetCursorPosition(3, 2);
+            Console.WriteLine("              .___.");
+            Console.SetCursorPosition(3, 3);
+            Console.WriteLine("              |___(");
+            Console.SetCursorPosition(3, 4);
+            Console.WriteLine("              I");
+            Console.SetCursorPosition(3, 5);
+            Console.WriteLine("             /_\\ ___");
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("     .___.   |,|/   \\");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("     |___(   | /_____\\       .___.");
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("     I        \\| u  -| _     |___(");
+            Console.SetCursorPosition(3, 9);
+            Console.WriteLine("    / \\    -_-_-_-_--|/ \\    I");
+            Console.SetCursorPosition(3, 10);
+            Console.WriteLine("   /___\\   \\._._._./-|___\\  / \\");
+            Console.SetCursorPosition(3, 11);
+            Console.WriteLine("   |_u |    |_   _| -| u_| /___\\");
+            Console.SetCursorPosition(3, 12);
+            Console.WriteLine("   |_-_-_-_-_-  U_| -|  _| | u_|");
+            Console.SetCursorPosition(3, 13);
+            Console.WriteLine("   |_\\._._._./   _|-_-_-_-_-_-_|");
+            Console.SetCursorPosition(3, 14);
+            Console.WriteLine("    \\_|-   -|    _|    ..   -|_|");
+            Console.SetCursorPosition(3, 15);
+            Console.WriteLine("     \\|-   U|    _| U  ++  U-|/");
+            Console.SetCursorPosition(3, 16);
+            Console.WriteLine("      |U   -|  U _|   ____  -|");
+            Console.SetCursorPosition(3, 17);
+            Console.WriteLine("      |- _ -|    _|  /|-|-\\ -|");
+            Console.SetCursorPosition(3, 18);
+            Console.WriteLine("      |-/#\\-|    _|  |-|-|| -|");
+            Console.SetCursorPosition(3, 19);
+            Console.WriteLine("   ,__|_H-H_|-----I__I|-|-I__|__,");
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.SetCursorPosition(18, 2);
+            Console.WriteLine("___.");
+            Console.SetCursorPosition(18, 3);
+            Console.WriteLine("___(");
+            Console.SetCursorPosition(9, 6);
+            Console.WriteLine("___.");
+            Console.SetCursorPosition(9, 7);
+            Console.WriteLine("___(");
+            Console.SetCursorPosition(33, 7);
+            Console.WriteLine("___.");
+            Console.SetCursorPosition(33, 8);
+            Console.WriteLine("___(");
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition(4, 19);
+            Console.WriteLine(" ,___");
+            Console.SetCursorPosition(10, 19);
+            Console.WriteLine("_");
+            Console.SetCursorPosition(14, 19);
+            Console.WriteLine("_");
+            Console.SetCursorPosition(16, 19);
+            Console.WriteLine("-----");
+            Console.SetCursorPosition(22, 19);
+            Console.WriteLine("__");
+            Console.SetCursorPosition(30, 19);
+            Console.WriteLine("__");
+            Console.SetCursorPosition(33,19);
+            Console.WriteLine("__,");
+
+            Console.ResetColor();
+
+
+
+
 
             Console.SetCursorPosition(7, 22);
             Console.Write("[1]");
@@ -304,9 +409,9 @@ internal class Scene
 
         bot.Output("덤벼 보시지 ㅋ");
         Console.SetCursorPosition(3, 18);
-        Console.Write("[LV{0}] 몬스터", monsterLevel);
+        Console.Write(" LV.{0} 몬스터", monsterLevel);
         Console.SetCursorPosition(3, 19);
-        Console.Write("[ HP ]");
+        Console.Write("{ HP }");
 
         while (monsterHP > 0 && Player.HP > 0)
         {
@@ -402,6 +507,18 @@ internal class Scene
 
                 if (monsterHP < 0)
                 {
+                    Console.SetCursorPosition(12, 8);
+                    Console.WriteLine("                  ");
+                    Console.SetCursorPosition(12, 9);
+                    Console.WriteLine("                  ");
+                    Console.SetCursorPosition(12, 10);
+                    Console.WriteLine("                  ");
+                    Console.SetCursorPosition(12, 11);
+                    Console.WriteLine("                  ");
+                    Console.SetCursorPosition(12, 12);
+                    Console.WriteLine("                  ");
+                    Console.SetCursorPosition(12, 13);
+                    Console.WriteLine("                  ");
                     Console.SetCursorPosition(3, 2);
                     Console.WriteLine("(   - _- )");
 
@@ -950,7 +1067,7 @@ internal class Scene
         for (int i = 0; i < Player.HP; i++)
         {
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write("♥");
                 Console.ResetColor();
             }

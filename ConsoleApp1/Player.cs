@@ -13,7 +13,7 @@ static class Player
     public static int Kill = 0;
 
 
-    public static int HP = 0;// 현재 채력
+    public static int HP = 0 ;// 현재 채력
     public static int CON = 0;// 최대 체력
     public static int STR;// 근력
     public static int LUK;// 행운
