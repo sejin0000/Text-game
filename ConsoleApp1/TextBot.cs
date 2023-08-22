@@ -9,6 +9,27 @@ using System.Xml.Linq;
 class TextBot
 {
     // │     [1]시작하기     [2]종료하기     │
+    public void MonsterOutput(string text)
+    {
+        int newxtLine = 0;
+        int maxtext = 20;
+        Console.SetCursorPosition(3, 19);
+        for (int i = 0; i < text.Length; i++)//text.Length 문자열 길이\
+        {
+            if (maxtext == 0)
+            {
+                newxtLine++;
+                Console.WriteLine("");
+                Console.SetCursorPosition(3, 3 + newxtLine);
+                maxtext = 20;
+            }
+            string text1 = text.Substring(i, 1);// 문자 하나하나 잘라줌   
+            Console.Write(text1);//자른 문자 출력해줌
+            Thread.Sleep(100);
+            maxtext--;
+        }
+        Console.WriteLine("");
+    }
     public void Output(string text)
     {
         int newxtLine = 0;

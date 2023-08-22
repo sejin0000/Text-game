@@ -365,7 +365,7 @@ internal class Scene
             switch (Program.pick)
             {
                 case 1:
-                    Battle();
+                    Dungeon();
                     break;
                 case 2:
                     Shop();
@@ -379,212 +379,6 @@ internal class Scene
             }
         }
     }//메인 씬
-    public void Battle()
-    {
-        MainPanel();
-
-        Console.SetCursorPosition(0, 22);
-        Console.WriteLine(" │     [1]가위         [2]바위         │ ");
-        Console.WriteLine(" │     [3]보                           │ ");
-
-        int monsterLevel = new Random().Next(1, 6);
-        if (monsterLevel < 5)
-        {
-            monsterLevel = Player.Level;
-        }
-        else
-        {
-            monsterLevel = Player.Level + 1;
-        }
-        int monsterHP = monsterLevel * 5;
-        if (monsterHP > 15)
-        {
-            monsterHP = 15;
-        }
-
-        Console.SetCursorPosition(3, 2);
-        Console.WriteLine("(  ㅋДㅋ)");
-
-        bot.Output("덤벼 보시지 ㅋ");
-        Console.SetCursorPosition(3, 18);
-        Console.Write(" LV.{0} 몬스터", monsterLevel);
-        Console.SetCursorPosition(3, 19);
-        Console.Write("{ HP }");
-
-        while (monsterHP > 0 && Player.HP > 0)
-        {
-            int monsterHand = new Random().Next(1, 4);// 1.가위 2.바위 3.보
-            Console.SetCursorPosition(9, 19);
-            Console.Write("                              ");
-            Console.SetCursorPosition(9, 19);
-            for (int i = 1; i <= monsterHP; i++)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write("♥");
-                Console.ResetColor();
-            }
-            bot.Option(3);
-            Console.SetCursorPosition(3, 2);
-            Console.WriteLine("                        ");
-            Console.SetCursorPosition(3, 3);
-            Console.WriteLine("                        ");
-
-            Console.SetCursorPosition(12, 8);
-            Console.WriteLine("                  ");
-            Console.SetCursorPosition(12, 9);
-            Console.WriteLine("                  ");
-            Console.SetCursorPosition(12, 10);
-            Console.WriteLine("                  ");
-            Console.SetCursorPosition(12, 11);
-            Console.WriteLine("                  ");
-            Console.SetCursorPosition(12, 12);
-            Console.WriteLine("                  ");
-            Console.SetCursorPosition(12, 13);
-            Console.WriteLine("                  ");
-            if (monsterHand == 1)
-            {
-
-                Console.SetCursorPosition(12, 8);
-                Console.WriteLine("    _____");
-                Console.SetCursorPosition(12, 9);
-                Console.WriteLine("___/   __)_______");
-                Console.SetCursorPosition(12, 10);
-                Console.WriteLine("         ________)");
-                Console.SetCursorPosition(12, 11);
-                Console.WriteLine("       __________)");
-                Console.SetCursorPosition(12, 12);
-                Console.WriteLine("      (____)");
-                Console.SetCursorPosition(12, 13);
-                Console.WriteLine("---.__(___)");
-
-            }
-            if (monsterHand == 2)
-            {
-                Console.SetCursorPosition(12, 8);
-                Console.WriteLine("    _____");
-                Console.SetCursorPosition(12, 9);
-                Console.WriteLine("___/   __)__");
-                Console.SetCursorPosition(12, 10);
-                Console.WriteLine("      (_____)");
-                Console.SetCursorPosition(12, 11);
-                Console.WriteLine("      (_____)");
-                Console.SetCursorPosition(12, 12);
-                Console.WriteLine("      (____)");
-                Console.SetCursorPosition(12, 13);
-                Console.WriteLine("---.__(___)");
-            }
-            if (monsterHand == 3)
-            {
-                Console.SetCursorPosition(12, 8);
-                Console.WriteLine("    ________");
-                Console.SetCursorPosition(12, 9);
-                Console.WriteLine("___/    ____)____");
-                Console.SetCursorPosition(12, 10);
-                Console.WriteLine("           ______)");
-                Console.SetCursorPosition(12, 11);
-                Console.WriteLine("          _______)");
-                Console.SetCursorPosition(12, 12);
-                Console.WriteLine("         _______)");
-                Console.SetCursorPosition(12, 13);
-                Console.WriteLine("---.__________)");
-            }
-            if (Program.pick == monsterHand)
-            {
-                Console.SetCursorPosition(3, 2);
-                Console.WriteLine("(   -Д- )");
-
-                bot.Output("크윽 아쉽군..");
-            }
-            else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 || Program.pick == 3 && monsterHand == 2)
-            {
-                Console.SetCursorPosition(3, 2);
-                Console.WriteLine("(  ‘Д’)");
-
-                monsterHP -= Player.ATK + Player.STR;
-                bot.Output("살살 때려!!");
-
-                if (monsterHP < 0)
-                {
-                    Console.SetCursorPosition(12, 8);
-                    Console.WriteLine("                  ");
-                    Console.SetCursorPosition(12, 9);
-                    Console.WriteLine("                  ");
-                    Console.SetCursorPosition(12, 10);
-                    Console.WriteLine("                  ");
-                    Console.SetCursorPosition(12, 11);
-                    Console.WriteLine("                  ");
-                    Console.SetCursorPosition(12, 12);
-                    Console.WriteLine("                  ");
-                    Console.SetCursorPosition(12, 13);
-                    Console.WriteLine("                  ");
-                    Console.SetCursorPosition(3, 2);
-                    Console.WriteLine("(   - _- )");
-
-                    bot.Output("크윽.. 좋은 싸움이였다...");
-                    Player.Kill += 1;
-                    Console.SetCursorPosition(9, 19);
-                    Console.Write("                              ");
-
-                    Player.Gold += 50;
-                    if (Player.Kill == 5)
-                    {
-                        Player.Kill = 0;
-                        LevelUP();
-                    }
-                }
-            }
-            else
-            {
-                Console.SetCursorPosition(3, 2);
-                Console.WriteLine("(  ㅋДㅋ)");
-
-                bot.Output("잘 좀 해보라고 형씨 ㅋㅋ");
-                Thread.Sleep(500);
-                if (Player.Use[1].function > 0)
-                {
-                    Player.Use[1].function -= monsterLevel;
-                    Player.DEF -= monsterLevel;
-                    if (Player.DEF < 0)
-                    {
-                        Player.DEF = 0;
-                    }
-                    if (Player.Use[1].function <= 0)
-                    {
-                        for (int i = 0; i < 10; i++)
-                        {
-                            if (Player.inventory[i].name == Player.Use[1].name)
-                            {
-                                Player.DEF = 0;
-                                Player.Use[1] = itemDB.a000;
-                                Player.inventory[i] = itemDB.a000;
-                                break;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    Player.HP -= monsterLevel;
-                    HP_Outut();
-                }
-            }
-        }
-        if (Player.HP > 0)
-        {
-            Console.SetCursorPosition(0, 22);
-            Console.WriteLine(" │     [1]계속하기      [2]돌아가기    │ ");
-            Console.WriteLine(" │                                     │ ");
-            bot.Option(2);
-        }
-        if (Program.pick == 1 && Player.HP > 0)
-        {
-            Battle();
-        }
-        if (Program.pick == 2 && Player.HP > 0)
-        {
-            MainScene();
-        }
-    }//전투 씬
     public void Shop()
     {
         int cursor = 0;
@@ -932,10 +726,30 @@ internal class Scene
         }
         if (Program.pick == 2)
         {
+            if (Player.inventory[num].name == Player.Use[0].name)
+            {
+                Player.Use[0] = itemDB.a000;
+                Player.ATK = 0;
+            }
+            if (Player.inventory[num].name == Player.Use[1].name)
+            {
+                Player.Use[1] = itemDB.a000;
+                Player.DEF = 0;
+            }
             Player.inventory[num] = itemDB.a000;
         }
         if (Program.pick == 3)
         {
+            if (Player.inventory[num].name == Player.Use[0].name)
+            {
+                Player.Use[0] = itemDB.a000;
+                Player.ATK = 0;
+            }
+            if (Player.inventory[num].name == Player.Use[1].name)
+            {
+                Player.Use[1] = itemDB.a000;
+                Player.DEF = 0;
+            }
             Player.Gold += Player.inventory[num].price / 2;
             Player.inventory[num] = itemDB.a000;
         }
@@ -1204,4 +1018,586 @@ internal class Scene
         Player.Level += 1;
         HP_Outut();
     }//레벨업
+    public void Dungeon()
+    {
+        bool isOut = false;
+        while (!isOut)
+        {
+            int randomMonster = new Random().Next(1, 3);// 범위 1~4 수정 바람
+
+            if (randomMonster == 1)
+            {
+                Slime();
+            }//슬라임 구현
+            if (randomMonster == 2)
+            {
+                Goblin();
+            }//고블린 
+
+            if (Player.HP > 0)
+            {
+                Console.SetCursorPosition(0, 22);
+                Console.WriteLine(" │     [1]계속하기      [2]돌아가기    │ ");
+                Console.WriteLine(" │                                     │ ");
+                bot.Option(2);
+            }
+            if (Program.pick == 1 && Player.HP > 0)
+            {
+                
+            }
+            if (Program.pick == 2 && Player.HP > 0)
+            {
+                MainScene();
+                isOut = true;
+            }
+        }
+    }
+    public void Slime()
+    {
+        MainPanel();
+        Console.SetCursorPosition(0, 22);
+        Console.WriteLine(" │     [1]가위         [2]바위         │ ");
+        Console.WriteLine(" │     [3]보                           │ ");
+
+        string monsterName = "슬라임";
+        int monsterHP = 5;
+        int monsterATK = 1;
+
+        Console.SetCursorPosition(3, 2);
+        Console.Write("{0}", monsterName);
+        Console.SetCursorPosition(3, 3);
+        Console.Write("{ HP }");
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(3, 11);
+            Console.WriteLine("");
+            Console.SetCursorPosition(3, 12);
+            Console.WriteLine("");
+            Console.SetCursorPosition(3, 13);
+            Console.WriteLine("  ..:::::::..");
+            Console.SetCursorPosition(3, 14);
+            Console.WriteLine(".:::::::::::::.");
+            Console.SetCursorPosition(3, 15);
+            Console.WriteLine("::::::::::::::::");
+            Console.SetCursorPosition(3, 16);
+            Console.WriteLine(":::::●::д:●:::");
+            Console.SetCursorPosition(3, 17);
+            Console.WriteLine(":::::::::::::::::");
+            Console.SetCursorPosition(3, 18);
+            Console.WriteLine("::::::::::::::::'");
+            Console.ResetColor();
+        }//몬스터 출력
+        Console.SetCursorPosition(9, 3);
+        for (int i = 1; i <= monsterHP; i++)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("♥");
+            Thread.Sleep(100);
+            Console.ResetColor();
+        }//생성과 동시에 채력 생성
+
+        while (monsterHP > 0 /*&& Player.HP > 0*/)
+        {
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.SetCursorPosition(3, 11);
+                Console.WriteLine("");
+                Console.SetCursorPosition(3, 12);
+                Console.WriteLine("");
+                Console.SetCursorPosition(3, 13);
+                Console.WriteLine("  ..:::::::..");
+                Console.SetCursorPosition(3, 14);
+                Console.WriteLine(".:::::::::::::.");
+                Console.SetCursorPosition(3, 15);
+                Console.WriteLine("::::::::::::::::");
+                Console.SetCursorPosition(3, 16);
+                Console.WriteLine(":::::●::д:●:::");
+                Console.SetCursorPosition(3, 17);
+                Console.WriteLine(":::::::::::::::::");
+                Console.SetCursorPosition(3, 18);
+                Console.WriteLine("::::::::::::::::'");
+                Console.ResetColor();
+            }//몬스터 출력
+            int monsterHand = new Random().Next(1, 4);// 범위 1~3
+            Console.SetCursorPosition(9, 3);
+            for (int i = 1; i <= monsterHP; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("♥");
+                Console.ResetColor();
+            }//주기적 채력 확인
+
+            bot.Option(3);
+            Console.SetCursorPosition(0, 19);
+            Console.WriteLine(" │                                     │ ");
+            if (monsterHand == 1)
+            {
+            Console.SetCursorPosition(18,5);
+            Console.WriteLine("    _____          ");
+            Console.SetCursorPosition(18,6);
+            Console.WriteLine("___/   __)_______  ");
+            Console.SetCursorPosition(18, 7);
+            Console.WriteLine("         ________) ");
+            Console.SetCursorPosition(18, 8);
+            Console.WriteLine("       __________) ");
+            Console.SetCursorPosition(18, 9);
+            Console.WriteLine("      (____)       ");
+            Console.SetCursorPosition(18, 10);
+            Console.WriteLine("---.__(___)        ");
+
+        }//손
+            if (monsterHand == 2)
+        {
+            Console.SetCursorPosition(18,5);
+            Console.WriteLine("    _____          ");
+            Console.SetCursorPosition(18, 6);
+            Console.WriteLine("___/   __)__       ");
+            Console.SetCursorPosition(18, 7);
+            Console.WriteLine("      (_____)      ");
+            Console.SetCursorPosition(18, 8);
+            Console.WriteLine("      (_____)      ");
+            Console.SetCursorPosition(18, 9);
+            Console.WriteLine("      (____)       ");
+            Console.SetCursorPosition(18, 10);
+            Console.WriteLine("---.__(___)        ");
+        }//손
+            if (monsterHand == 3)
+        {
+            Console.SetCursorPosition(18, 5);
+            Console.WriteLine("    ________      ");
+            Console.SetCursorPosition(18, 6);
+            Console.WriteLine("___/    ____)____ ");
+            Console.SetCursorPosition(18, 7);
+            Console.WriteLine("           ______)");
+            Console.SetCursorPosition(18, 8);
+            Console.WriteLine("          _______)");
+            Console.SetCursorPosition(18, 9);
+            Console.WriteLine("         _______) ");
+            Console.SetCursorPosition(18, 10);
+            Console.WriteLine("---.__________)   ");
+        }//손
+
+        if (Program.pick == monsterHand)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.SetCursorPosition(3, 2);
+                Console.SetCursorPosition(3, 11);
+                Console.WriteLine("");
+                Console.SetCursorPosition(3, 12);
+                Console.WriteLine("");
+                Console.SetCursorPosition(3, 13);
+                Console.WriteLine("  ..:::::::..");
+                Console.SetCursorPosition(3, 14);
+                Console.WriteLine(".:::::::::::::.");
+                Console.SetCursorPosition(3, 15);
+                Console.WriteLine("::::::::::::::::");
+                Console.SetCursorPosition(3, 16);
+                Console.WriteLine(":::::ㅍ::д:ㅍ:::");
+                Console.SetCursorPosition(3, 17);
+                Console.WriteLine(":::::::::::::::::");
+                Console.SetCursorPosition(3, 18);
+                Console.WriteLine("::::::::::::::::'");
+                Console.ResetColor();
+
+                bot.MonsterOutput("크윽 아쉽군..");
+            }
+            else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 || Program.pick == 3 && monsterHand == 2)
+            {
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.SetCursorPosition(3, 11);
+                    Console.WriteLine("");
+                    Console.SetCursorPosition(3, 12);
+                    Console.WriteLine("");
+                    Console.SetCursorPosition(3, 13);
+                    Console.WriteLine("  ..:::::::..");
+                    Console.SetCursorPosition(3, 14);
+                    Console.WriteLine(".:::::::::::::.");
+                    Console.SetCursorPosition(3, 15);
+                    Console.WriteLine("::::::::::::::::");
+                    Console.SetCursorPosition(3, 16);
+                    Console.WriteLine("::::: >::д:< :::");
+                    Console.SetCursorPosition(3, 17);
+                    Console.WriteLine(":::::::::::::::::");
+                    Console.SetCursorPosition(3, 18);
+                    Console.WriteLine("::::::::::::::::'");
+                    Console.ResetColor();
+                }//슬라임 표정
+
+                monsterHP -= Player.ATK + Player.STR;
+                bot.MonsterOutput("윽 아파..!!");
+                Console.SetCursorPosition(9, 3);
+                Console.WriteLine("                              │ ");
+
+                if (monsterHP <= 0)
+                {
+                    {
+                        Console.SetCursorPosition(18, 5);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 6);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 7);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 8);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 9);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 10);
+                        Console.WriteLine("                  ");
+                    }// 손가리기
+
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.SetCursorPosition(3, 11);
+                        Console.WriteLine("");
+                        Console.SetCursorPosition(3, 12);
+                        Console.WriteLine("");
+                        Console.SetCursorPosition(3, 13);
+                        Console.WriteLine("  ..:::::::..");
+                        Console.SetCursorPosition(3, 14);
+                        Console.WriteLine(".:::::::::::::.");
+                        Console.SetCursorPosition(3, 15);
+                        Console.WriteLine("::::::::::::::::");
+                        Console.SetCursorPosition(3, 16);
+                        Console.WriteLine(":::::ㅡ::ㅡ:ㅡ:::");
+                        Console.SetCursorPosition(3, 17);
+                        Console.WriteLine(":::::::::::::::::");
+                        Console.SetCursorPosition(3, 18);
+                        Console.WriteLine("::::::::::::::::'");
+                        Console.ResetColor();
+                    }//슬라임표정
+
+                    bot.MonsterOutput("너..너무해..");
+                    Player.Kill += 1;
+                    Player.Gold += 50;
+                    if (Player.Kill == 5)
+                    {
+                        Player.Kill = 0;
+                        LevelUP();
+                    }
+                }
+            }
+            else
+            {
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.SetCursorPosition(3, 11);
+                    Console.WriteLine("");
+                    Console.SetCursorPosition(3, 12);
+                    Console.WriteLine("");
+                    Console.SetCursorPosition(3, 13);
+                    Console.WriteLine("  ..:::::::..");
+                    Console.SetCursorPosition(3, 14);
+                    Console.WriteLine(".:::::::::::::.");
+                    Console.SetCursorPosition(3, 15);
+                    Console.WriteLine("::::::::::::::::");
+                    Console.SetCursorPosition(3, 16);
+                    Console.WriteLine(":::::ㅡ::д:ㅡ:::");
+                    Console.SetCursorPosition(3, 17);
+                    Console.WriteLine(":::::::::::::::::");
+                    Console.SetCursorPosition(3, 18);
+                    Console.WriteLine("::::::::::::::::'");
+                    Console.ResetColor();
+                }//슬라임표정
+
+                bot.MonsterOutput("진짜 못한다..");
+                Thread.Sleep(500);
+                if (monsterHP < 15)
+                {
+                    monsterHP += 1;
+                }
+                if (Player.Use[1].function > 0)
+                {
+                    Player.Use[1].function -= monsterATK;
+                    Player.DEF -= monsterATK;
+;
+                    if (Player.DEF < 0)
+                    {
+                        Player.DEF = 0;
+                    }
+                    if (Player.Use[1].function <= 0)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            if (Player.inventory[i].name == Player.Use[1].name)
+                            {
+                                Player.DEF = 0;
+                                Player.Use[1] = itemDB.a000;
+                                Player.inventory[i] = itemDB.a000;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Player.HP -= monsterATK;
+                    HP_Outut();
+                }
+            }
+
+        }
+    }//슬라임
+    public void Goblin()
+    {
+        MainPanel();
+        Console.SetCursorPosition(0, 22);
+        Console.WriteLine(" │     [1]가위         [2]바위         │ ");
+        Console.WriteLine(" │     [3]보                           │ ");
+
+        string monsterName = "고블린";
+        int monsterHP = 5;
+        int monsterATK = 20;
+
+        Console.SetCursorPosition(3, 2);
+        Console.Write("{0}", monsterName);
+        Console.SetCursorPosition(3, 3);
+        Console.Write("{ HP }");
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition(3, 11);
+            Console.WriteLine(":..    .....   .:");
+            Console.SetCursorPosition(3, 12);
+            Console.WriteLine("':::..:::::::.:::");
+            Console.SetCursorPosition(3, 13);
+            Console.WriteLine("  '':::ㅇ:::ㅇ:: ");
+            Console.SetCursorPosition(3, 14);
+            Console.WriteLine("    .::::::::    ");
+            Console.SetCursorPosition(3, 15);
+            Console.WriteLine(" .::::::  ::::   ");
+            Console.SetCursorPosition(3, 16);
+            Console.WriteLine(":::::::::. ''    ");
+            Console.SetCursorPosition(3, 17);
+            Console.WriteLine("::::::::::::.    ");
+            Console.SetCursorPosition(3, 18);
+            Console.WriteLine("::::::::::::::   ");
+            Console.ResetColor();
+        }//몬스터 출력
+        Console.SetCursorPosition(9, 3);
+        for (int i = 1; i <= monsterHP; i++)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("♥");
+            Thread.Sleep(100);
+            Console.ResetColor();
+        }//생성과 동시에 채력 생성
+
+        while (monsterHP > 0 /*&& Player.HP > 0*/)
+        {
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.SetCursorPosition(3, 11);
+                Console.WriteLine(":..    .....   .:");
+                Console.SetCursorPosition(3, 12);
+                Console.WriteLine("':::..:::::::.:::");
+                Console.SetCursorPosition(3, 13);
+                Console.WriteLine("  '':::ㅇ:::ㅇ:: ");
+                Console.SetCursorPosition(3, 14);
+                Console.WriteLine("    .::::::::    ");
+                Console.SetCursorPosition(3, 15);
+                Console.WriteLine(" .::::::  ::::   ");
+                Console.SetCursorPosition(3, 16);
+                Console.WriteLine(":::::::::. ''    ");
+                Console.SetCursorPosition(3, 17);
+                Console.WriteLine("::::::::::::.    ");
+                Console.SetCursorPosition(3, 18);
+                Console.WriteLine("::::::::::::::   ");
+                Console.ResetColor();
+            }//몬스터 출력
+            int monsterHand = new Random().Next(1, 4);// 범위 1~3
+            Console.SetCursorPosition(9, 3);
+            for (int i = 1; i <= monsterHP; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("♥");
+                Console.ResetColor();
+            }//주기적 채력 확인
+
+            bot.Option(3);
+            Console.SetCursorPosition(3, 28);
+            Console.WriteLine("                           ");
+            Console.SetCursorPosition(0, 19);
+            Console.WriteLine(" │                                     │ ");
+            if (monsterHand == 1)
+            {
+                Console.SetCursorPosition(18, 5);
+                Console.WriteLine("    _____          ");
+                Console.SetCursorPosition(18, 6);
+                Console.WriteLine("___/   __)_______  ");
+                Console.SetCursorPosition(18, 7);
+                Console.WriteLine("         ________) ");
+                Console.SetCursorPosition(18, 8);
+                Console.WriteLine("       __________) ");
+                Console.SetCursorPosition(18, 9);
+                Console.WriteLine("      (____)       ");
+                Console.SetCursorPosition(18, 10);
+                Console.WriteLine("---.__(___)        ");
+
+            }//손
+            if (monsterHand == 2)
+            {
+                Console.SetCursorPosition(18, 5);
+                Console.WriteLine("    _____          ");
+                Console.SetCursorPosition(18, 6);
+                Console.WriteLine("___/   __)__       ");
+                Console.SetCursorPosition(18, 7);
+                Console.WriteLine("      (_____)      ");
+                Console.SetCursorPosition(18, 8);
+                Console.WriteLine("      (_____)      ");
+                Console.SetCursorPosition(18, 9);
+                Console.WriteLine("      (____)       ");
+                Console.SetCursorPosition(18, 10);
+                Console.WriteLine("---.__(___)        ");
+            }//손
+            if (monsterHand == 3)
+            {
+                Console.SetCursorPosition(18, 5);
+                Console.WriteLine("    ________      ");
+                Console.SetCursorPosition(18, 6);
+                Console.WriteLine("___/    ____)____ ");
+                Console.SetCursorPosition(18, 7);
+                Console.WriteLine("           ______)");
+                Console.SetCursorPosition(18, 8);
+                Console.WriteLine("          _______)");
+                Console.SetCursorPosition(18, 9);
+                Console.WriteLine("         _______) ");
+                Console.SetCursorPosition(18, 10);
+                Console.WriteLine("---.__________)   ");
+            }//손
+
+            if (Program.pick == monsterHand)
+            {
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.SetCursorPosition(3, 11);
+                Console.WriteLine(":..    .....   .:");
+                Console.SetCursorPosition(3, 12);
+                Console.WriteLine("':::..:::::::.:::");
+                Console.SetCursorPosition(3, 13);
+                Console.WriteLine("  '':::ㅍ:::ㅍ:: ");
+                Console.SetCursorPosition(3, 14);
+                Console.WriteLine("    .::::::::    ");
+                Console.SetCursorPosition(3, 15);
+                Console.WriteLine(" .::::::  ::::   ");
+                Console.SetCursorPosition(3, 16);
+                Console.WriteLine(":::::::::. ''    ");
+                Console.SetCursorPosition(3, 17);
+                Console.WriteLine("::::::::::::.    ");
+                Console.SetCursorPosition(3, 18);
+                Console.WriteLine("::::::::::::::   ");
+                Console.ResetColor();
+                bot.MonsterOutput("크윽 아쉽군..");
+            }
+            else if (Program.pick == 1 && monsterHand == 3 || Program.pick == 2 && monsterHand == 1 || Program.pick == 3 && monsterHand == 2)
+            {
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.SetCursorPosition(3, 11);
+                    Console.WriteLine(":..    .....   .:");
+                    Console.SetCursorPosition(3, 12);
+                    Console.WriteLine("':::..:::::::.:::");
+                    Console.SetCursorPosition(3, 13);
+                    Console.WriteLine("  ''::: @::: @:: ");
+                    Console.SetCursorPosition(3, 14);
+                    Console.WriteLine("    .::::::::    ");
+                    Console.SetCursorPosition(3, 15);
+                    Console.WriteLine(" .::::::  ::::   ");
+                    Console.SetCursorPosition(3, 16);
+                    Console.WriteLine(":::::::::. ''    ");
+                    Console.SetCursorPosition(3, 17);
+                    Console.WriteLine("::::::::::::.    ");
+                    Console.SetCursorPosition(3, 18);
+                    Console.WriteLine("::::::::::::::   ");
+                    Console.ResetColor();
+                }//슬라임 표정
+
+                monsterHP -= Player.ATK + Player.STR;
+                bot.MonsterOutput("윽 아파..!!");
+                Console.SetCursorPosition(9, 3);
+                Console.WriteLine("                              │ ");
+
+                if (monsterHP <= 0)
+                {
+                    {
+                        Console.SetCursorPosition(18, 5);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 6);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 7);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 8);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 9);
+                        Console.WriteLine("                  ");
+                        Console.SetCursorPosition(18, 10);
+                        Console.WriteLine("                  ");
+                    }// 손가리기
+
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.SetCursorPosition(3, 11);
+                        Console.WriteLine(":..    .....   .:");
+                        Console.SetCursorPosition(3, 12);
+                        Console.WriteLine("':::..:::::::.:::");
+                        Console.SetCursorPosition(3, 13);
+                        Console.WriteLine("  '':::ㅡ:::ㅡ:: ");
+                        Console.SetCursorPosition(3, 14);
+                        Console.WriteLine("    .::::::::    ");
+                        Console.SetCursorPosition(3, 15);
+                        Console.WriteLine(" .::::::  ::::   ");
+                        Console.SetCursorPosition(3, 16);
+                        Console.WriteLine(":::::::::. ''    ");
+                        Console.SetCursorPosition(3, 17);
+                        Console.WriteLine("::::::::::::.    ");
+                        Console.SetCursorPosition(3, 18);
+                        Console.WriteLine("::::::::::::::   ");
+                        Console.ResetColor();
+                    }//슬라임표정
+
+                    bot.MonsterOutput("너..너무해..");
+                    Player.Kill += 1;
+                    Player.Gold += 50;
+                    if (Player.Kill == 5)
+                    {
+                        Player.Kill = 0;
+                        LevelUP();
+                    }
+                }
+            }
+            else
+            {
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.SetCursorPosition(3, 11);
+                    Console.WriteLine(":..    .....   .:");
+                    Console.SetCursorPosition(3, 12);
+                    Console.WriteLine("':::..:::::::.:::");
+                    Console.SetCursorPosition(3, 13);
+                    Console.WriteLine("  ''::: \\::: \\:: ");
+                    Console.SetCursorPosition(3, 14);
+                    Console.WriteLine("    .::::::::    ");
+                    Console.SetCursorPosition(3, 15);
+                    Console.WriteLine(" .::::::  ::::   ");
+                    Console.SetCursorPosition(3, 16);
+                    Console.WriteLine(":::::::::. ''    ");
+                    Console.SetCursorPosition(3, 17);
+                    Console.WriteLine("::::::::::::.    ");
+                    Console.SetCursorPosition(3, 18);
+                    Console.WriteLine("::::::::::::::   ");
+                    Console.ResetColor();
+                }//슬라임표정
+
+                bot.MonsterOutput("도...돈이다!!");
+                Player.Gold -= monsterATK;
+                if (Player.Gold < 0)
+                {
+                    Player.Gold = 0;
+                }
+                Console.SetCursorPosition(3,28);
+                Console.WriteLine("주머니가 허전하다...");
+                HP_Outut();
+            }
+
+        }
+    }//고블린
 }
