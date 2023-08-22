@@ -53,10 +53,8 @@ internal class Scene
     public void TitleScene()
     {
         Console.SetCursorPosition(0, 0);
-        Console.WriteLine(@"                                                                              ");
-
-        Console.SetCursorPosition(0, 1);
-        Console.WriteLine(@" ┌─────────────────────────────────────┐ 
+        Console.Write(@"
+ ┌─────────────────────────────────────┐ 
  │                                     │ 
  │      ____  _____  __  __  ____      │ 
  │     /    \/   __\/  \/  \/    \     │ 
@@ -84,7 +82,7 @@ internal class Scene
  │                                     │
  └─────────────────────────────────────┘
 ");
-        Console.SetCursorPosition(3, 26);
+
 
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.SetCursorPosition(7, 3);

@@ -61,7 +61,7 @@ class TextBot
         do
         {
             Console.SetCursorPosition(0, 26);
-            Console.Write(" │                                     │");
+            Console.Write(" │                   ");
             Console.SetCursorPosition(3, 26);
             string a = Console.ReadLine();
             if (int.TryParse(a, out num) && num <= _pick && num > 0)
@@ -72,7 +72,7 @@ class TextBot
             else
             {
                 Console.SetCursorPosition(0, 26);
-                Console.Write(" │                                     │");
+                Console.Write(" │                    ");
                 Console.SetCursorPosition(3, 28);
                 Console.WriteLine("잘못된 입력입니다");
 
