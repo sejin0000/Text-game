@@ -12,7 +12,7 @@ internal class Scene
     TextBot bot = new TextBot();    
     Item item = new Item();
 
-    
+
     public void MainPanel()
     {
         Console.SetCursorPosition(0, 1);
@@ -84,7 +84,7 @@ internal class Scene
 ");
 
 
-        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.SetCursorPosition(7, 3);
         Console.Write(" ____  _____  __  __  ____");
         Console.SetCursorPosition(7, 4);
@@ -94,7 +94,7 @@ internal class Scene
         Console.SetCursorPosition(7, 6);
         Console.Write(" |__| \\_____/\\__/\\__/ |__|");
 
-        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.SetCursorPosition(7, 8);
         Console.Write("    _____  _____  _____");
         Console.SetCursorPosition(7, 9);
@@ -566,7 +566,7 @@ internal class Scene
             }
         } while (!isOut);
 
-    }//인벤토리 씬 
+    }//인벤토리 씬
     public void MyInfo()
     {
         Console.SetCursorPosition(0, 1);
@@ -618,7 +618,7 @@ internal class Scene
 
         Console.SetCursorPosition(12, 11);
         Console.Write(" 골드  : ");
-        Console.SetCursorPosition(19, 11);
+        Console.SetCursorPosition(21, 11);
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine("{0}G", Player.Gold);
         Console.ResetColor();
@@ -1051,7 +1051,7 @@ internal class Scene
                 isOut = true;
             }
         }
-    }
+    }// 던전
     public void Slime()
     {
         MainPanel();
